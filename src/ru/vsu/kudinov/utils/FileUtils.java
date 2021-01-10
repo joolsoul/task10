@@ -1,7 +1,7 @@
 package ru.vsu.kudinov.utils;
 
-import ru.vsu.kudinov.Point;
-import ru.vsu.kudinov.Triangle;
+import ru.vsu.kudinov.common.Point;
+import ru.vsu.kudinov.common.Triangle;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,23 +13,30 @@ import java.util.Scanner;
 
 public class FileUtils
 {
-
-    public static List<Triangle> readFromFile(String filename) throws FileNotFoundException
+    public static List<Triangle> readFromFile(String filename)
     {
-        String[] lines = readLinesFromFile("src\\ru\\vsu\\kudinov\\files\\" + filename);
-        List<Triangle> triangleList = new ArrayList<>();
-        for (String line : lines)
+        try
         {
-            List<Integer> coordinates = stringToArrayList(line);
-            List<Point> points = createPoints(coordinates);
-            triangleList.add(createTriangle(points));
+            String[] lines = readLinesFromFile("src\\ru\\vsu\\kudinov\\" + filename);
+            List<Triangle> triangleList = new ArrayList<>();
+            for (String line : lines) {
+                List<Integer> coordinates = stringToArrayList(line);
+                List<Point> points = createPoints(coordinates);
+                triangleList.add(createTriangle(points));
+            }
+            return triangleList;
         }
-        return triangleList;
+        catch (FileNotFoundException e)
+        {
+            System.err.println("File not found");
+            System.exit(1);
+        }
+        return null;
     }
 
     public static void writeFile(int[] quartersArray, String fileName) throws IOException
     {
-        FileWriter outputFile = new FileWriter("src\\ru\\vsu\\kudinov\\files\\" + fileName);
+        FileWriter outputFile = new FileWriter("src\\ru\\vsu\\kudinov\\" + fileName);
         for(int i = 0; i < 5; i++)
         {
             if(quartersArray[i] != 0 && i != 4)
@@ -47,35 +54,22 @@ public class FileUtils
 
     private static List<Point> createPoints(List<Integer> coordinates)
     {
-        List<Point> pointList = new ArrayList<>();
+        List<Point> pointsList = new ArrayList<>();
         for (int i = 0; i < coordinates.size(); i++)
         {
             if (i % 2 == 0)
             {
-                pointList.add(new Point(coordinates.get(i), coordinates.get(i + 1)));
+                pointsList.add(new Point(coordinates.get(i), coordinates.get(i + 1)));
             }
         }
-        return pointList;
+        return pointsList;
     }
 
-    private static Triangle createTriangle(List<Point> points)
+    private static Triangle createTriangle(List<Point> pointsList)
     {
-        return new Triangle(points.get(0), points.get(1), points.get(2));
+        return new Triangle(pointsList.get(0), pointsList.get(1), pointsList.get(2));
     }
 
-    public static List<Integer> stringToArrayList(String line)
-    {
-        Scanner scanner = new Scanner(line);
-        scanner.useLocale(Locale.ROOT);
-        scanner.useDelimiter("(\\s|[,;])+");
-        List<Integer> list = new ArrayList<>();
-        while (scanner.hasNext())
-        {
-            list.add(scanner.nextInt());
-        }
-        return list;
-    }
-    
     private static String[] readLinesFromFile(String fileName) throws FileNotFoundException
     {
         List<String> lines;
@@ -88,6 +82,19 @@ public class FileUtils
             }
         }
         return lines.toArray(new String[0]);
+    }
+
+    private static List<Integer> stringToArrayList(String line)
+    {
+        Scanner scanner = new Scanner(line);
+        scanner.useLocale(Locale.ROOT);
+        scanner.useDelimiter("(\\s|[,;])+");
+        List<Integer> list = new ArrayList<>();
+        while (scanner.hasNext())
+        {
+            list.add(scanner.nextInt());
+        }
+        return list;
     }
 }
 

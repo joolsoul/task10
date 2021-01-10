@@ -1,4 +1,4 @@
-package ru.vsu.kudinov;
+package ru.vsu.kudinov.common;
 
 public class Point
 {

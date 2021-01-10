@@ -1,4 +1,4 @@
-package ru.vsu.kudinov;
+package ru.vsu.kudinov.common;
 
 public class Triangle
 {
@@ -38,5 +38,4 @@ public class Triangle
 
         return QuartersOfTheCoordinateGrid.Notquarter;
     }
-
 }

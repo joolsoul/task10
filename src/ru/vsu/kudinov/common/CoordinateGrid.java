@@ -1,4 +1,5 @@
-package ru.vsu.kudinov;
+package ru.vsu.kudinov.common;
+
 import java.util.List;
 
 public class CoordinateGrid
@@ -10,37 +11,36 @@ public class CoordinateGrid
         this.triangles = triangles;
     }
 
-    public int[] countTriangles()
+    public int[] countTrianglesInEqualQuarters()
     {
-        int[] array = new int[5];
+        int[] quartersArray = new int[5];
+
         for(Triangle triangle : triangles)
         {
-
             switch (triangle.getQuarter(triangle))
             {
                 case Quarter1:
-                    array[0]++;
+                    quartersArray[0]++;
                     break;
 
                 case Quarter2:
-                    array[1]++;
+                    quartersArray[1]++;
                     break;
 
                 case Quarter3:
-                    array[2]++;
+                    quartersArray[2]++;
                     break;
 
                 case Quarter4:
-                    array[3]++;
+                    quartersArray[3]++;
                     break;
 
                 case Notquarter:
-                    array[4]++;
+                    quartersArray[4]++;
                     break;
             }
-
         }
-        return array;
+        return quartersArray;
     }
 
 }
