@@ -3,7 +3,6 @@ package ru.vsu.kudinov.GUI;
 import ru.vsu.kudinov.common.CoordinateGrid;
 import ru.vsu.kudinov.common.Triangle;
 import ru.vsu.kudinov.utils.FileUtils;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

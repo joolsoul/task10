@@ -13,18 +13,19 @@ import java.util.Scanner;
 
 public class FileUtils
 {
-    public static List<Triangle> readFromFile(String filename)
+    public static List<Triangle> readFromFile(String fileName)
     {
         try
         {
-            String[] lines = readLinesFromFile("src\\ru\\vsu\\kudinov\\" + filename);
-            List<Triangle> triangleList = new ArrayList<>();
-            for (String line : lines) {
+            String[] lines = readLinesFromFile("src\\ru\\vsu\\kudinov\\" + fileName);
+            List<Triangle> triangles = new ArrayList<>();
+            for (String line : lines)
+            {
                 List<Integer> coordinates = stringToArrayList(line);
                 List<Point> points = createPoints(coordinates);
-                triangleList.add(createTriangle(points));
+                triangles.add(createTriangle(points));
             }
-            return triangleList;
+            return triangles;
         }
         catch (FileNotFoundException e)
         {
@@ -34,9 +35,10 @@ public class FileUtils
         return null;
     }
 
-    public static void writeFile(int[] quartersArray, String fileName) throws IOException
+    public static void writeToFile(int[] quartersArray, String fileName) throws IOException
     {
         FileWriter outputFile = new FileWriter("src\\ru\\vsu\\kudinov\\" + fileName);
+
         for(int i = 0; i < 5; i++)
         {
             if(quartersArray[i] != 0 && i != 4)
@@ -47,7 +49,6 @@ public class FileUtils
             {
                 outputFile.write(quartersArray[i] + " triangles are in several quarters");
             }
-
         }
         outputFile.close();
     }

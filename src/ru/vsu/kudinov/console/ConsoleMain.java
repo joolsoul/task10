@@ -3,7 +3,6 @@ package ru.vsu.kudinov.console;
 import ru.vsu.kudinov.common.CoordinateGrid;
 import ru.vsu.kudinov.common.Triangle;
 import ru.vsu.kudinov.utils.FileUtils;
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
@@ -19,14 +18,15 @@ public class ConsoleMain
         int[] quartersArray = coordinateGrid.countTrianglesInEqualQuarters();
 
         String outputFileName = readFileName("output");
-        FileUtils.writeFile(quartersArray, outputFileName);
+        FileUtils.writeToFile(quartersArray, outputFileName);
     }
 
-    private static String readFileName(String typeOfTheFile) {
+    private static String readFileName(String typeOfTheFile)
+    {
         String fileName;
-        Scanner in = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
         System.out.printf("Enter the name of the %s file: ", typeOfTheFile);
-        fileName = in.next();
+        fileName = scanner.next();
 
         return "files\\" + fileName;
     }
